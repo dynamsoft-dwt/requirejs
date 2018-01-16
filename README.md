@@ -4,16 +4,25 @@ To support RequireJS, add following code to the end of **dynamsoft.webtwain.min.
 
 ```javascript
 if ("function"==typeof define&&define.amd) {
-    define({
-        Dynamsoft: Dynamsoft
-    });
+    define(function() {
+        return {
+            Dynamsoft: Dynamsoft
+        };
+    })
 }
 ```
 Dynamically load Web TWAIN module in **main.js**:
 
 ```javascript
+require.config({
+    baseUrl: "lib",
+    paths: {
+        "dwt": "dynamsoft.webtwain.min",
+    }
+});
+
 // Load Dynamic Web TWAIN.
-requirejs(["dynamsoft.webtwain.min"], function(module) {
+requirejs(["dwt"], function (module) {
     Dynamsoft = module.Dynamsoft;
     initializeContainer(Dynamsoft);
 });

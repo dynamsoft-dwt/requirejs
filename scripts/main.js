@@ -1,8 +1,15 @@
+require.config({
+    baseUrl: "lib",
+    paths: {
+        "dwt": "dynamsoft.webtwain.min",
+    }
+});
+
 var Dynamsoft = null;
 var dwtObject = null;
 
 // Load Dynamic Web TWAIN.
-requirejs(["dynamsoft.webtwain.min"], function(module) {
+requirejs(["dwt"], function (module) {
     Dynamsoft = module.Dynamsoft;
     initializeContainer(Dynamsoft);
 });
@@ -14,11 +21,11 @@ document.body.appendChild(docContainer);
 
 // Initialize the container when Dynamic Web TWAIN is ready.
 function initializeContainer(Dynamsoft) {
-    Dynamsoft.WebTwainEnv.CreateDWTObject(docContainer.id, function(obj){
+    Dynamsoft.WebTwainEnv.CreateDWTObject(docContainer.id, function (obj) {
         dwtObject = obj;
         dwtObject.Width = 480;
         dwtObject.Height = 640;
-    }, function(errorString){
+    }, function (errorString) {
         console.log(errorString);
     });
 }
@@ -32,17 +39,15 @@ scanButton.onclick = function () {
     }
 
     dwtObject.IfDisableSourceAfterAcquire = true;
-    var bSelected = dwtObject.SelectSource(); 
+    var bSelected = dwtObject.SelectSource();
 
-    if(bSelected) {
+    if (bSelected) {
         var successCallback, failCallback;
         successCallback = failCallback = function () {
             dwtObject.CloseSource();
-    };
+        };
 
-    dwtObject.OpenSource();
-    dwtObject.AcquireImage(successCallback, failCallback);  
+        dwtObject.OpenSource();
+        dwtObject.AcquireImage(successCallback, failCallback);
     }
 };
-
-
