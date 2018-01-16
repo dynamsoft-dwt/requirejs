@@ -1,29 +1,25 @@
 # Dynamic Web TWAIN with RequireJS
 
-To support RequireJS, add following code to the end of **dynamsoft.webtwain.min.js**:
+To use Dynamic Web TWAIN with RequireJS, add following code to **main.js**:
 
 ```javascript
-if ("function"==typeof define&&define.amd) {
-    define(function() {
-        return {
-            Dynamsoft: Dynamsoft
-        };
-    })
-}
+require.config({
+    paths: {
+        "dwt": "https://www.dynamsoft.com/library/dwt/dynamsoft.webtwain.min",
+    },
+    shim: {
+        'dwt': {　　　　　　　　
+            exports: 'Dynamsoft'　　　　　　
+        }
+    }
+});
 ```
 Dynamically load Web TWAIN module in **main.js**:
 
 ```javascript
-require.config({
-    baseUrl: "lib",
-    paths: {
-        "dwt": "dynamsoft.webtwain.min",
-    }
-});
-
 // Load Dynamic Web TWAIN.
 requirejs(["dwt"], function (module) {
-    Dynamsoft = module.Dynamsoft;
+    Dynamsoft = module;
     initializeContainer(Dynamsoft);
 });
 

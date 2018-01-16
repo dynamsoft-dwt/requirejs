@@ -1,7 +1,11 @@
 require.config({
-    baseUrl: "lib",
     paths: {
-        "dwt": "dynamsoft.webtwain.min",
+        "dwt": "https://www.dynamsoft.com/library/dwt/dynamsoft.webtwain.min",
+    },
+    shim: {
+        'dwt': {　　　　　　　　
+            exports: 'Dynamsoft'　　　　　　
+        }
     }
 });
 
@@ -10,7 +14,7 @@ var dwtObject = null;
 
 // Load Dynamic Web TWAIN.
 requirejs(["dwt"], function (module) {
-    Dynamsoft = module.Dynamsoft;
+    Dynamsoft = module;
     initializeContainer(Dynamsoft);
 });
 
