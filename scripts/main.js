@@ -9,13 +9,11 @@ require.config({
     }
 });
 
-var Dynamsoft = null;
 var dwtObject = null;
 
 // Load Dynamic Web TWAIN.
 requirejs(["dwt"], function (module) {
-    Dynamsoft = module;
-    initializeContainer(Dynamsoft);
+    initializeContainer(module);
 });
 
 // Create a document container
@@ -37,7 +35,7 @@ function initializeContainer(Dynamsoft) {
 // Scan documents when clicking a button.
 var scanButton = document.getElementById('scanButton');
 scanButton.onclick = function () {
-    if (Dynamsoft == null || dwtObject == null) {
+    if (dwtObject == null) {
         alert("Dynamic Web TWAIN is not ready!");
         return;
     }
