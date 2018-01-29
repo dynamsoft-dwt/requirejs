@@ -34,3 +34,6 @@ function initializeContainer(Dynamsoft) {
     });
 }
 ```
+
+## Blog
+[Using Dynamic Web TWAIN with RequireJS](http://www.codepool.biz/web-twain-requirejs.html)
